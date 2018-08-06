@@ -1,5 +1,5 @@
 <?php
-echo"Hello world Text <br>";
+echo"Hello world Text change <br>";
 //postgres://fcvbkebobrnglo:5e964f89185ffc0aa3177ea7880e85f19cf4a1e954f36c7589a0e115a57ed2a7@ec2-54-228-219-2.eu-west-1.compute.amazonaws.com:5432/d14ekichol45s8
    $host        = "host = ec2-54-228-219-2.eu-west-1.compute.amazonaws.com";
    $port        = "port = 5432";
@@ -11,6 +11,7 @@ echo"Hello world Text <br>";
       echo "Error : Unable to open database\n";
    } else {
       echo "\nOpened database successfully\n";
+
 
 	 $sql =<<<EOF
       SELECT * from test_table;
