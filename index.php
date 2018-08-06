@@ -1,10 +1,10 @@
 <?php
 echo"Hello world Text <br>";
-
-   $host        = "host = ec2-54-217-218-80.eu-west-1.compute.amazonaws.com";
+//postgres://fcvbkebobrnglo:5e964f89185ffc0aa3177ea7880e85f19cf4a1e954f36c7589a0e115a57ed2a7@ec2-54-228-219-2.eu-west-1.compute.amazonaws.com:5432/d14ekichol45s8
+   $host        = "host = ec2-54-228-219-2.eu-west-1.compute.amazonaws.com";
    $port        = "port = 5432";
-   $dbname      = "dbname = dcuu3pkru941ct";
-   $credentials = "user = uwafvrfbblvzim password=1725cba0327d8b02d829db492705dbc6787176c582358e2b71bde6dbb23f97c0";
+   $dbname      = "dbname = d14ekichol45s8";
+   $credentials = "user = fcvbkebobrnglo password=5e964f89185ffc0aa3177ea7880e85f19cf4a1e954f36c7589a0e115a57ed2a7";
 
    $db = pg_connect( "$host $port $dbname $credentials"  );
    if(!$db) {
@@ -27,10 +27,6 @@ EOF;
    echo "Operation done successfully\n";
  
 }
-
- // $db_connection = pg_connect("host=ec2-54-217-218-80.eu-west-1.compute.amazonaws.com dbname=dcuu3pkru941ct user=uwafvrfbblvzim password=1725cba0327d8b02d829db492705dbc6787176c582358e2b71bde6dbb23f97c0");
- // $result = pg_query($db_connection, "SELECT * FROM test_table");
- // echo"<pre>"; print_r($result); die;
 
 
 ?>
