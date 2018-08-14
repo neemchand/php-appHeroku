@@ -1,11 +1,6 @@
-/vendor
-/node_modules
-/storage/framework/views/
-Homestead.yaml
-Homestead.json
+vendor
 .env
  *~
 .env~
-/nbproject
-storage/*
+nbproject
 

@@ -6,6 +6,28 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit055a89504c38b0ed4b176f39e563bd14
 {
+    public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'Predis\\' => 7,
+        ),
+        'D' => 
+        array (
+            'Dotenv\\' => 7,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Predis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/predis/predis/src',
+        ),
+        'Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/publiux/phpdotenv/src',
+        ),
+    );
+
     public static $prefixesPsr0 = array (
         'M' => 
         array (
@@ -19,6 +41,8 @@ class ComposerStaticInit055a89504c38b0ed4b176f39e563bd14
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit055a89504c38b0ed4b176f39e563bd14::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit055a89504c38b0ed4b176f39e563bd14::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit055a89504c38b0ed4b176f39e563bd14::$prefixesPsr0;
 
         }, null, ClassLoader::class);

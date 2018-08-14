@@ -1,10 +1,41 @@
 <?php
-echo"Hello world Text change <br>";
-//postgres://fcvbkebobrnglo:5e964f89185ffc0aa3177ea7880e85f19cf4a1e954f36c7589a0e115a57ed2a7@ec2-54-228-219-2.eu-west-1.compute.amazonaws.com:5432/d14ekichol45s8
-   $host        = "host = ec2-54-228-219-2.eu-west-1.compute.amazonaws.com";
+require __DIR__ . '/vendor/autoload.php';
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
+/** Task:1
+ *  Sample php app deployment
+ *  */
+ echo"Hello world Text change <br>";
+
+
+/** Task:2
+ * Redis Connection and store value redis cache
+ *  */
+$redis_url = parse_url(getenv("REDIS_URL"));
+$redis = new Predis\Client($redis_url);
+$redis->set("hello_world", "Hi from redis cache php!");
+$value = $redis->get("hello_world");
+print_r($value);
+
+
+
+/** Task:3
+ * PSql Connection and get data from db
+ **/
+
+    
+$url = parse_url(getenv("DATABASE_URL"));
+//echo"<pre>"; print_r($row[0]); die;
+  $host =  $url["host"];
+  $username = $url["user"];
+  $password = $url["pass"];
+  $database = substr($url["path"], 1);
+	
+   $host        = "host = $host ";
    $port        = "port = 5432";
-   $dbname      = "dbname = d14ekichol45s8";
-   $credentials = "user = fcvbkebobrnglo password=5e964f89185ffc0aa3177ea7880e85f19cf4a1e954f36c7589a0e115a57ed2a7";
+   $dbname      = "dbname = $database";
+   $credentials = "user = $username password=$password";
 
    $db = pg_connect( "$host $port $dbname $credentials"  );
    if(!$db) {
@@ -12,12 +43,8 @@ echo"Hello world Text change <br>";
    } else {
       echo "\nOpened database successfully\n";
 
-
-	 $sql =<<<EOF
-      SELECT * from test_table;
-EOF;
    
-   $return = pg_query($db, $sql);
+   $return = pg_query($db, "SELECT * from test_table");
    if(!$return) {
       echo pg_last_error($db);
       exit;
@@ -28,6 +55,7 @@ EOF;
    echo "Operation done successfully\n";
  
 }
+  
 
 
 ?>

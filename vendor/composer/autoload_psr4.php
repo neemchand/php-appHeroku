@@ -6,4 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Predis\\' => array($vendorDir . '/predis/predis/src'),
+    'Dotenv\\' => array($vendorDir . '/publiux/phpdotenv/src'),
 );
