@@ -7,9 +7,13 @@ require __DIR__ . '/vendor/autoload.php';
 use \Dotenv\Dotenv;
 use \Rollbar\Rollbar;
 use \Rollbar\Payload\Level;
-//if(getenv("ENVIRONMENT")=='production'){
+
+if(getenv("ENVIRONMENT")=='local'){
 $dotenv = new Dotenv(__DIR__);
 $dotenv->load();
+}
+//if(getenv("ENVIRONMENT")=='production'){
+
 // installs global error and exception handlers
 Rollbar::init(
   array(
@@ -18,6 +22,9 @@ Rollbar::init(
   )
 );
 
+Rollbar::log(Level::info(), 'Test production info message');
+throw new Exception('Test production exception');
+//}
 
 //}
 
