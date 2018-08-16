@@ -1,7 +1,8 @@
 {
     "require": {
-        "monolog/monolog": "1.0.*",
-        "predis/predis": "^1.1"
+        "monolog/monolog": "^1.23",
+        "predis/predis": "^1.1",
+        "rollbar/rollbar": "~1.5"
     },
     "require-dev": {
         "publiux/phpdotenv": "^3.0"

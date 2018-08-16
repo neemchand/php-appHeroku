@@ -7,9 +7,18 @@ namespace Composer\Autoload;
 class ComposerStaticInit055a89504c38b0ed4b176f39e563bd14
 {
     public static $prefixLengthsPsr4 = array (
+        'R' => 
+        array (
+            'Rollbar\\' => 8,
+        ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'Predis\\' => 7,
+        ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
         ),
         'D' => 
         array (
@@ -18,23 +27,25 @@ class ComposerStaticInit055a89504c38b0ed4b176f39e563bd14
     );
 
     public static $prefixDirsPsr4 = array (
+        'Rollbar\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rollbar/rollbar/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'Predis\\' => 
         array (
             0 => __DIR__ . '/..' . '/predis/predis/src',
         ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/publiux/phpdotenv/src',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'M' => 
-        array (
-            'Monolog' => 
-            array (
-                0 => __DIR__ . '/..' . '/monolog/monolog/src',
-            ),
         ),
     );
 
@@ -43,7 +54,6 @@ class ComposerStaticInit055a89504c38b0ed4b176f39e563bd14
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit055a89504c38b0ed4b176f39e563bd14::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit055a89504c38b0ed4b176f39e563bd14::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit055a89504c38b0ed4b176f39e563bd14::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }

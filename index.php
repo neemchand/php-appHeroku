@@ -1,7 +1,11 @@
-<?php
+<?php 
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
 require __DIR__ . '/vendor/autoload.php';
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
+
 
 /** Task:1
  *  Sample php app deployment
@@ -13,8 +17,6 @@ $dotenv->load();
  * Redis Connection and store value redis cache
  *  */
 $redis_url = parse_url(getenv("REDIS_URL"));
- echo"<pre>"; print_r($redis_url); die;
-
 $redis = new Predis\Client($redis_url);
 $redis->set("hello_world", "Hi from redis cache php!");
 $value = $redis->get("hello_world");
@@ -25,7 +27,6 @@ print_r($value);
 /** Task:3
  * PSql Connection and get data from db
  **/
-
     
 $url = parse_url(getenv("DATABASE_URL"));
 //echo"<pre>"; print_r($row[0]); die;
@@ -52,12 +53,12 @@ $url = parse_url(getenv("DATABASE_URL"));
       exit;
    } 
    while($row = pg_fetch_row($return)) {
-     echo"<pre>"; print_r($row[0]); die;
+     echo"<pre>"; print_r($row[0]);
    }
-   echo "Operation done successfully\n";
+   echo "<br>Operation done successfully\n";
  
 }
-  
+ 
 
 
 ?>
