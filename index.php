@@ -6,6 +6,21 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
+use Rollbar\Rollbar;
+use Rollbar\Payload\Level;
+if(getenv("ENVIRONMENT")=='production'){
+
+// installs global error and exception handlers
+Rollbar::init(
+  array(
+    'access_token' => getenv("ROLLBAR_ACCESS_TOKEN"),
+    'environment' => 'production'
+  )
+);
+
+Rollbar::log(Level::info(), 'Test info message');
+throw new Exception('Test exception');
+}
 
 /** Task:1
  *  Sample php app deployment
@@ -16,11 +31,11 @@ $dotenv->load();
 /** Task:2
  * Redis Connection and store value redis cache
  *  */
-$redis_url = parse_url(getenv("REDIS_URL"));
-$redis = new Predis\Client($redis_url);
-$redis->set("hello_world", "Hi from redis cache php!");
-$value = $redis->get("hello_world");
-print_r($value);
+//$redis_url = parse_url(getenv("REDIS_URL"));
+//$redis = new Predis\Client($redis_url);
+//$redis->set("hello_world", "Hi from redis cache php!");
+//$value = $redis->get("hello_world");
+//print_r($value);
 
 
 
