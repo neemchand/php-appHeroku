@@ -8,23 +8,24 @@ use \Dotenv\Dotenv;
 use \Rollbar\Rollbar;
 use \Rollbar\Payload\Level;
 
-if(getenv("ENVIRONMENT")=='local'){
+if(getenv("ENVIRONMENT") !='production'){
 $dotenv = new Dotenv(__DIR__);
 $dotenv->load();
 }
-//if(getenv("ENVIRONMENT")=='production'){
+
+if(getenv("ENVIRONMENT")=='production'){
 
 // installs global error and exception handlers
 Rollbar::init(
   array(
     'access_token' => getenv("ROLLBAR_ACCESS_TOKEN"),
-    'environment' => 'production'
+    'environment' => getenv("ENVIRONMENT")
   )
 );
 
 Rollbar::log(Level::info(), 'Test production info message');
 throw new Exception('Test production exception');
-//}
+}
 
 //}
 
