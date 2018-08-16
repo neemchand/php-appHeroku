@@ -3,13 +3,13 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 require __DIR__ . '/vendor/autoload.php';
-$dotenv = new Dotenv\Dotenv(__DIR__);
+
+use \Dotenv\Dotenv;
+use \Rollbar\Rollbar;
+use \Rollbar\Payload\Level;
+//if(getenv("ENVIRONMENT")=='production'){
+$dotenv = new Dotenv(__DIR__);
 $dotenv->load();
-
-use Rollbar\Rollbar;
-use Rollbar\Payload\Level;
-if(getenv("ENVIRONMENT")=='production'){
-
 // installs global error and exception handlers
 Rollbar::init(
   array(
@@ -18,9 +18,8 @@ Rollbar::init(
   )
 );
 
-Rollbar::log(Level::info(), 'Test info message');
-throw new Exception('Test exception');
-}
+
+//}
 
 /** Task:1
  *  Sample php app deployment
