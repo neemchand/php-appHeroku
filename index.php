@@ -13,7 +13,7 @@ $dotenv->load();
  * Redis Connection and store value redis cache
  *  */
 $redis_url = parse_url(getenv("REDIS_URL"));
- echo"<pre>"; print_r($value); die;
+ echo"<pre>"; print_r($redis_url); die;
 
 $redis = new Predis\Client($redis_url);
 $redis->set("hello_world", "Hi from redis cache php!");
