@@ -12,46 +12,51 @@ if(getenv("ENVIRONMENT") !='production'){
 $dotenv = new Dotenv(__DIR__);
 $dotenv->load();
 }
-//print_r($dotenv);
 
+Rollbar::init(
+  array(
+    'access_token' => getenv("ROLLBAR_ACCESS_TOKEN"),
+    'environment' => getenv("ENVIRONMENT")
+  )
+);
 
-//}
 
 /** Task:1
  *  Sample php app deployment
  *  */
  echo"Hello world Text change <br>";
-// print_r(getenv("REDIS_URL")); die;
 
 /** Task:2
  * Redis Connection and store value redis cache
  *  */
- 
-// if(getenv("ENVIRONMENT") ==='local'){
-//$redis_url = parse_url(getenv("REDIS_URL"));
-//$redis = new Predis\Client($redis_url);
-// }
-//$redis_url = getenv("REDIS_URL");
+try{
+
 $redis = new Predis\Client(getenv("REDIS_URL"));
 $redis->set("hello_world", "Hi from redis cache php!");
 $value = $redis->get("hello_world");
+print_r($value);  
 
-print_r($value);
+} catch (\Exception $e) {
+    Rollbar::log(Level::ERROR, $e);
+}
 
 
 /** Task:3
  * PSql Connection and get data from db
  **/
-    
-$url = parse_url(getenv("DATABASE_URL"));
-//echo"<pre>"; print_r($row[0]); die;
+/** Task:4
+ * Rollbar Connection and heroku setup
+ **/
+ try{
+  $url = parse_url(getenv("DATABASE_URL"));
   $host =  $url["host"];
   $username = $url["user"];
   $password = $url["pass"];
+  $port = $url["port"];
   $database = substr($url["path"], 1);
 	
    $host        = "host = $host ";
-   $port        = "port = 5432";
+   $port        = "port = $port";
    $dbname      = "dbname = $database";
    $credentials = "user = $username password=$password";
 
@@ -70,22 +75,13 @@ $url = parse_url(getenv("DATABASE_URL"));
    while($row = pg_fetch_row($return)) {
      echo"<pre>"; print_r($row[0]);
    }
-   echo "<br>Operation done successfully\n";
+   echo "<br> Db query executed successfully\n";
  
+  }
+
+} catch (\Exception $e) {
+    Rollbar::log(Level::ERROR, $e);
 }
-if(getenv("ENVIRONMENT")=='production'){
-
-// installs global error and exception handlers
-Rollbar::init(
-  array(
-    'access_token' => getenv("ROLLBAR_ACCESS_TOKEN"),
-    'environment' => getenv("ENVIRONMENT")
-  )
-);
-
-//Rollbar::log(Level::info(), 'yo yo message');
-//throw new Exception('Test production exception');
-} 
 
 
 ?>
