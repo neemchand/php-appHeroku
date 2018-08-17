@@ -26,11 +26,13 @@ $dotenv->load();
 /** Task:2
  * Redis Connection and store value redis cache
  *  */
+ 
 // if(getenv("ENVIRONMENT") ==='local'){
 //$redis_url = parse_url(getenv("REDIS_URL"));
 //$redis = new Predis\Client($redis_url);
 // }
-$redis = new Predis\Client();
+$redis_url = parse_url(getenv("REDIS_URL"));
+$redis = new Predis\Client($redis_url);
 $redis->set("hello_world", "Hi from redis cache php!");
 $value = $redis->get("hello_world");
 
