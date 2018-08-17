@@ -7,10 +7,10 @@ require __DIR__ . '/vendor/autoload.php';
 use \Dotenv\Dotenv;
 use \Rollbar\Rollbar;
 use \Rollbar\Payload\Level;
-
+if(getenv("ENVIRONMENT") !='production'){
 $dotenv = new Dotenv(__DIR__);
 $dotenv->load();
-
+}
 //print_r($dotenv);
 
 
