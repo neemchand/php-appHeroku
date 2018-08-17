@@ -24,7 +24,7 @@ Rollbar::init(
 /** Task:1
  *  Sample php app deployment
  *  */
- echo"Hello world Text change <br>";
+ echo"Task1:Hello world Text change <br>";
 
 /** Task:2
  * Redis Connection and store value redis cache
@@ -34,7 +34,7 @@ try{
 $redis = new Predis\Client(getenv("REDIS_URL"));
 $redis->set("hello_world", "Hi from redis cache php!");
 $value = $redis->get("hello_world");
-print_r($value);  
+ echo"Task2: Redis connection--".print_r($value);  
 
 } catch (\Exception $e) {
     Rollbar::log(Level::ERROR, $e);
@@ -64,7 +64,7 @@ print_r($value);
    if(!$db) {
       echo "Error : Unable to open database\n";
    } else {
-      echo "<br>\nOpened database successfully\n";
+      echo "<br>Task2:\nOpened database successfully\n";
 
    
    $return = pg_query($db, "SELECT * from test_table");
@@ -75,10 +75,10 @@ print_r($value);
    while($row = pg_fetch_row($return)) {
      echo"<pre>"; print_r($row[0]);
    }
-   echo "<br> Db query executed successfully\n";
+   echo "<br>Task3: Db query executed successfully\n";
  
   }
-
+ echo "<br>Task4: Rollbar integration successfull\n";
 } catch (\Exception $e) {
     Rollbar::log(Level::ERROR, $e);
 }
