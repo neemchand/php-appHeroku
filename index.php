@@ -34,7 +34,7 @@ $redis_url=(getenv("ENVIRONMENT")!='production')?parse_url(getenv("REDIS_URL")):
 $redis = new Predis\Client($redis_url);
 $redis->set("hello_world", "Hi from redis cache php!");
 $value = $redis->get("hello_world");
-echo"Task2: Redis connection--$value";  
+echo" <br>Task2: Redis connection--$value";  
 
 } catch (\Exception $e) {
     Rollbar::log(Level::ERROR, $e);
@@ -64,7 +64,7 @@ echo"Task2: Redis connection--$value";
    if(!$db) {
       echo "Error : Unable to open database\n";
    } else {
-      echo "<br> \nOpened database successfully\n";
+      echo "<br><br>Task3: \nOpened database successfully\n";
 
    
    $return = pg_query($db, "SELECT * from test_table");
@@ -75,7 +75,7 @@ echo"Task2: Redis connection--$value";
    while($row = pg_fetch_row($return)) {
      echo"<pre>"; print_r($row[0]);
    }
-   echo "<br>Task3: Db query executed successfully\n";
+   echo "<br>Db query executed successfully\n";
  
   }
  echo "<br>Task4: Rollbar integration successfull\n";
