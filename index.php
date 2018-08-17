@@ -20,7 +20,7 @@ $dotenv->load();
  *  Sample php app deployment
  *  */
  echo"Hello world Text change <br>";
-
+print_r(getenv("REDIS_URL")); die;
 
 /** Task:2
  * Redis Connection and store value redis cache
@@ -29,8 +29,8 @@ $redis_url = parse_url(getenv("REDIS_URL"));
 $redis = new Predis\Client($redis_url);
 $redis->set("hello_world", "Hi from redis cache php!");
 $value = $redis->get("hello_world");
-print_r($value);
 
+print_r($value);
 
 
 /** Task:3
