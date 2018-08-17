@@ -6,6 +6,5 @@
         "vlucas/phpdotenv": "^2.5"
     },
     "require-dev": {
-        "publiux/phpdotenv": "^3.0"
     }
 }

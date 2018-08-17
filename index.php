@@ -12,7 +12,7 @@ if(getenv("ENVIRONMENT") !='production'){
 $dotenv = new Dotenv(__DIR__);
 $dotenv->load();
 }
-
+//print_r($dotenv);
 if(getenv("ENVIRONMENT")=='production'){
 
 // installs global error and exception handlers
