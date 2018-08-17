@@ -30,11 +30,11 @@ Rollbar::init(
  * Redis Connection and store value redis cache
  *  */
 try{
-
-$redis = new Predis\Client(getenv("REDIS_URL"));
+$redis_url=(getenv("ENVIRONMENT")!='production')?parse_url(getenv("REDIS_URL")):getenv("REDIS_URL");
+$redis = new Predis\Client($redis_url);
 $redis->set("hello_world", "Hi from redis cache php!");
 $value = $redis->get("hello_world");
- echo"Task2: Redis connection--".print_r($value);  
+echo"Task2: Redis connection--$value";  
 
 } catch (\Exception $e) {
     Rollbar::log(Level::ERROR, $e);
@@ -64,7 +64,7 @@ $value = $redis->get("hello_world");
    if(!$db) {
       echo "Error : Unable to open database\n";
    } else {
-      echo "<br>Task2:\nOpened database successfully\n";
+      echo "<br> \nOpened database successfully\n";
 
    
    $return = pg_query($db, "SELECT * from test_table");
