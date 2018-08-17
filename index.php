@@ -31,8 +31,8 @@ $dotenv->load();
 //$redis_url = parse_url(getenv("REDIS_URL"));
 //$redis = new Predis\Client($redis_url);
 // }
-$redis_url = parse_url(getenv("REDIS_URL"));
-$redis = new Predis\Client($redis_url);
+//$redis_url = getenv("REDIS_URL");
+$redis = new Predis\Client(getenv("REDIS_URL"));
 $redis->set("hello_world", "Hi from redis cache php!");
 $value = $redis->get("hello_world");
 
