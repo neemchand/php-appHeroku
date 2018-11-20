@@ -37,7 +37,7 @@ deploy:
         enabled: true
     working_directory: ~/testimage
     environment:
-      HEROKU_APP: $HEROKU_APP
+      HEROKU_APP: "testimage-a"
     steps:
       - checkout
       - run:
