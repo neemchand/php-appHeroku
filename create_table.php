@@ -1,4 +1,4 @@
-<?php 
+<?php   
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
@@ -24,21 +24,8 @@ Rollbar::init(
 /** Task:1
  *  Sample php app deployment
  *  */
- echo"Task1:Hello world..This is first sample php app with circle ci <br>";
+ echo"Insert Raw Data to table";
 
-/** Task:2
- * Redis Connection and store value redis cache
- *  */
-try{
-$redis_url=(getenv("ENVIRONMENT")!='production')?parse_url(getenv("REDIS_URL")):getenv("REDIS_URL");
-$redis = new Predis\Client($redis_url);
-$redis->set("hello_world", "Hi from redis cache php!");
-$value = $redis->get("hello_world");
-echo" <br>Task2: Redis connection--$value";  
-
-} catch (\Exception $e) {
-    Rollbar::log(Level::ERROR, $e);
-}
 
 
 /** Task:3
@@ -65,9 +52,15 @@ echo" <br>Task2: Redis connection--$value";
       echo "Error : Unable to open database\n";
    } else {
       echo "<br><br>Task3: \nOpened database successfully\n";
+    $table=$_REQUEST["table_name"];
+    $sql =<<<EOF
+      CREATE TABLE $table
+      (ID INT PRIMARY KEY     NOT NULL,
+      test_text       TEXT    NOT NULL
+      );
+EOF;
 
-   
-   $return = pg_query($db, "SELECT * from test_table");
+   $return = pg_query($db, $sql);
    if(!$return) {
       echo pg_last_error($db);
       exit;
@@ -75,10 +68,9 @@ echo" <br>Task2: Redis connection--$value";
    while($row = pg_fetch_row($return)) {
      echo"<pre>"; print_r($row[0]);
    }
-   echo "<br>Db query executed successfully\n";
+   echo "<br>$table table created successfully\n";
  
   }
- echo "<br>Task4: Rollbar integration successfull\n";
 } catch (\Exception $e) {
     Rollbar::log(Level::ERROR, $e);
 }
